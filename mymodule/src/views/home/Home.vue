@@ -1,5 +1,41 @@
 <template>
 <div id="banner">
+    <div class="nav">
+        <el-row>
+            <el-header>
+                <el-col :span="21">
+                    <el-menu
+                        :default-active="activeIndex"
+                        class="el-menu-demo"
+                        mode="horizontal"
+                        @select="handleSelect"
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b">
+                        <el-menu-item v-for="(item,index) in navList" :key="index" @click="tabs(item.name)" :index="index">
+                        <!-- <router-link :key="index" :to="item.path"> -->
+                            {{item.name}}
+                        <!-- </router-link> -->
+                        </el-menu-item>
+                        <!-- <el-submenu index="2">
+                            <template slot="title">我的工作台</template>
+                            <el-menu-item index="2-1">选项1</el-menu-item>
+                            <el-menu-item index="2-2">选项2</el-menu-item>
+                            <el-menu-item index="2-3">选项3</el-menu-item>
+                            <el-submenu index="2-4">
+                                <template slot="title">选项4</template>
+                                <el-menu-item index="2-4-1">选项1</el-menu-item>
+                                <el-menu-item index="2-4-2">选项2</el-menu-item>
+                                <el-menu-item index="2-4-3">选项3</el-menu-item>
+                            </el-submenu>
+                        </el-submenu>
+                        <el-menu-item index="3" >消息中心</el-menu-item>
+                        <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item> -->
+                    </el-menu>
+                </el-col>
+            </el-header>
+        </el-row>
+    </div>
      <div class="parallax__layer parallax__layer__1" style="width:100%">
         <img src="../../assets/bg8@2x.png" alt="" class="animated fadeInUp">
     </div>
@@ -30,6 +66,26 @@
 
 
 <style>
+/* 标题栏样式 */
+.nav{
+    position: absolute;
+    height: 50px;
+    /* margin: 0 auto; */
+    width: 800px;
+    background-color: #E6E6FA;
+    opacity:0.3;
+    left: 30%;
+    top: 20px;
+    border-radius: 5px
+}
+.el-col{
+    width: 100% !important;
+}
+.el-menu-demo{
+    width: 400px;
+    margin: 0 auto !important;
+}
+/* 背景样式 */
 #banner{
     perspective: 100px;
     height: 100vh;
@@ -149,15 +205,43 @@
     -o-animation-delay: 0.6s;
     -ms-animation-delay: 0.6s;
 }
-/* .info::before {
-    content: '';
-    position: absolute;
-    bottom: -0.125em;
-    width: 100%;
-    height: 0.25em;
-    background: -webkit-linear-gradient(315deg, transparent, transparent 45%, #008000, transparent 55%, transparent 100%), -webkit-linear-gradient(45deg, transparent, transparent 45%, #008000, transparent 55%, transparent 100%);
-    background: linear-gradient(135deg, transparent, transparent 45%, #008000, transparent 55%, transparent 100%), linear-gradient(45deg, transparent, transparent 45%, #008000, transparent 55%, transparent 100%);
-    background-size: 0.5em 0.5em;
-    background-repeat: repeat-x, repeat-x;
-} */
 </style>
+<script>
+export default {
+  data() {
+    return {
+      navList: [
+        {
+          name: "首页",
+          path: "/"
+        },
+        {
+          name: "我的文章",
+          path: "/"
+        },
+        {
+          name: "商品列表",
+          path: "/"
+        },
+        {
+          name: "关于我们",
+          path: "/"
+        }
+      ],
+      
+      activeIndex: "0",
+      activeIndex2: "0",
+    };
+  },
+  //  computed: {
+  //   navList() {
+  //     return this.$store.state.navList;
+  //   }
+  // },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  }
+};
+</script>
